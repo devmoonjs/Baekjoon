@@ -27,6 +27,10 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 import java.util.Scanner;
 import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 /*
    사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
@@ -48,28 +52,19 @@ class Solution
 		/*
 		   표준입력 System.in 으로부터 스캐너를 만들어 데이터를 읽어옵니다.
 		 */
-		Scanner sc = new Scanner(System.in);
-		int T;
-		T=sc.nextInt();
-		/*
-		   여러 개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
-		*/
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(bf.readLine());
 
-		for(int test_case = 1; test_case <= T; test_case++)
-		{
-            int[] arr = new int[10];
-
+        for (int test_case = 1; test_case <= T; test_case++) {
+            StringTokenizer st = new StringTokenizer(bf.readLine());
             int sum = 0;
-
-            for (int i = 0; i < 10; i++) {
-                arr[i] = sc.nextInt();
-                if (arr[i] % 2 > 0) {
-                    sum += arr[i];
+            while (st.hasMoreTokens()) {
+                int temp = Integer.parseInt(st.nextToken());
+                if (temp % 2 != 0) {
+                    sum += temp;
                 }
             }
-
             System.out.println("#" + test_case + " " + sum);
         }
-        sc.close();
     }
 }
