@@ -1,53 +1,53 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
+
 
 public class Main {
-    static ArrayList<Integer>[] A;
-    static Boolean visited[];
-    public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
-
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        A = new ArrayList[n+1];
-        visited = new Boolean[n + 1];
-        Arrays.fill(visited, false);
-
-        for (int i = 1; i < n + 1; i++) {
-            A[i] = new ArrayList<Integer>();
-        }
-
-        for (int i = 0; i < m; i++) {
-            st = new StringTokenizer(bf.readLine());
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-
-            A[s].add(e);
-            A[e].add(s);
-        }
-
-        int count = 0;
-        for (int i = 1; i < n + 1; i++) {
-            if (!visited[i]) {
-                count++;
-                DFS(i);
-            }
-        }
-        System.out.println(count);
-    }
-
-    static void DFS(int v) {
-        if (visited[v]) {
-            return;
-        }
-        visited[v] = true;
-        for (int i : A[v]) {
-            if (visited[i] == false) {
-                DFS(i);
-            }
-        }
-    }
+	
+	static boolean visited[];
+	static ArrayList<Integer>[] A;
+	
+	private static void DFS(int a) {
+		visited[a] = true;
+		
+		for (int x : A[a]) {
+			if (!visited[x]) {
+				DFS(x);
+			}
+		}
+		
+	}
+	
+	public static void main (String args[]) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		A = new ArrayList[N+1];
+		visited = new boolean[N+1];
+		
+		for (int i = 1; i < N+1; i++) {
+			A[i] = new ArrayList<Integer>();
+		}
+		for (int i = 0; i < M; i++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			
+			A[a].add(b);
+			A[b].add(a);
+		}
+		int count = 0;
+		
+		for (int i = 1; i < N+1; i++) {
+			if (!visited[i]) {
+				DFS(i);
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
 }
