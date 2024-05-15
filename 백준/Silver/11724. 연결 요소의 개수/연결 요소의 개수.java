@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 
@@ -8,6 +10,7 @@ public class Main {
 	
 	static boolean visited[];
 	static ArrayList<Integer>[] A;
+	static Queue<Integer> q = new LinkedList<Integer>();
 	
 	private static void DFS(int a) {
 		visited[a] = true;
@@ -18,6 +21,23 @@ public class Main {
 			}
 		}
 		
+	}
+	
+	private static void BFS(int a) {
+		visited[a] = true;
+		q.add(a);
+		
+		while(!q.isEmpty()) {
+			int b = q.poll();
+			
+			for (int x : A[b]) {
+				if (!visited[x]) {
+					visited[x] = true;
+					q.add(x);
+				}
+			}
+			
+		}
 	}
 	
 	public static void main (String args[]) throws IOException {
@@ -44,7 +64,7 @@ public class Main {
 		
 		for (int i = 1; i < N+1; i++) {
 			if (!visited[i]) {
-				DFS(i);
+				BFS(i);
 				count++;
 			}
 		}
