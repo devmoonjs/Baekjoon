@@ -1,0 +1,7 @@
+-- '수원' 지역의 '평균 미세먼지 오염도' 와 '평균 초미세먼지' 를 연도별로
+
+SELECT YEAR(YM) AS 'YEAR', ROUND(AVG(PM_VAL1),2) AS 'PM10', ROUND(AVG(PM_VAL2),2) AS 'PM2.5'
+FROM AIR_POLLUTION
+WHERE LOCATION1 = '경기도' AND LOCATION2 = '수원'
+GROUP BY YEAR(YM)
+ORDER BY YEAR(YM);
