@@ -2,55 +2,54 @@ import java.util.*;
 
 class Solution {
     
-   static class Point{
-       int a;
-       int b;
-       
-       Point(int a, int b) {
-           this.a = a;
-           this.b = b;
-       }
-   } 
-    
+    static int[] dx = {0,1,-1,0};
+    static int[] dy = {1,0,0,-1};
     static int[][] maps;
-    static int N;
-    static int M;
-    static int[] dx = {1, 0, -1, 0};
-    static int[] dy = {0, 1, 0, -1};
-    static boolean[][] check;
+    static int n;
+    static int m;
+    static Queue<Point> q = new LinkedList<>();
     
-    private static void bfs(int a, int b){
-        Queue<Point> q = new LinkedList<>();
-        q.add(new Point(a,b));
-        check[a][b] = true;
+    static class Point {
+        int x;
+        int y;
         
-        while(!q.isEmpty()){
-            Point temp = q.poll();
-            for (int i = 0; i < 4; i++) {
-                int newA = temp.a + dx[i];
-                int newB = temp.b + dy[i];
+        Point (int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    
+    private void bfs(int x, int y) {
+        q.add(new Point(x, y));
+        
+        while (!q.isEmpty()) {
+            Point point = q.poll();
+            
+            for (int i = 0; i < dx.length; i++) {
+                int newX = point.x + dx[i];
+                int newY = point.y + dy[i];
                 
-                if (newA >= 0 && newA < N && newB >= 0 && newB < M && maps[newA][newB] == 1 && !check[newA][newB]){
-                    q.add(new Point(newA, newB));
-                    check[newA][newB] = true;
-                    maps[newA][newB] = maps[temp.a][temp.b] + 1;
+                if (newX >= 0 && newX < n && newY >= 0 && newY < m) {
+                    if (maps[newX][newY] == 1) {
+                        q.add(new Point(newX, newY));
+                        maps[newX][newY] += maps[point.x][point.y];
+                    }
                 }
             }
         }
     }
     
     public int solution(int[][] maps) {
+        n = maps.length;
+        m = maps[0].length;
         this.maps = maps;
-        N = maps.length;
-        M = maps[0].length;
-        check = new boolean[N][M];
-        bfs(0,0);
         
-        int result = maps[N-1][M-1];
-        if (result == 1) {
-            return -1;
-        } else {
+        bfs(0,0);
+        int result = maps[n-1][m-1];
+        if (result > 1) {
             return result;
+        } else {
+            return -1;
         }
     }
 }
