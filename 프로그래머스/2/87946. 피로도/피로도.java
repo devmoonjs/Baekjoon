@@ -32,7 +32,7 @@ class Solution {
                 Arrays.fill(visited, false);
                 visited[i] = true;
                 dfs(k-d[i][1], visited, 1);
-                visited[i] = false;
+                // visited[i] = false;
             }
         }
         
