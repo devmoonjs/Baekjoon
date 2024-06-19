@@ -2,30 +2,29 @@ class Solution {
     
     static boolean[] visited;
     static int[][] computers;
-    static int n;
     
-    private static void dfs(int index) { // index -> 노드 번호, 각 노드마다 자식 노드를 체크
+    private static void dfs(int index) {
         visited[index] = true;
         
-        for (int i = 0 ; i < n; i++) {
-            if (computers[index][i] != 0 && !visited[i]) {
+        for (int i = 0; i < computers[index].length; i++) {
+            if (computers[index][i] == 1 & !visited[i]) {
                 dfs(i);
             }
         }
+        
     }
     
     public int solution(int n, int[][] computers) {
-        this.computers = computers;
-        this.n = n;
         visited = new boolean[n];
-        int answer = 0;
+        this.computers = computers;
         
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
+        int cnt = 0;
+        for (int i = 0; i < computers.length; i++) {
+            if (!visited[i]){
                 dfs(i);
-                answer++;
+                cnt++;
             }
         }
-        return answer;
+        return cnt;
     }
 }
