@@ -1,41 +1,34 @@
+// 9:10 ~ 9:40
 import java.util.*;
 
 class Solution {
-
-    static int len;
-    static int[][] d;
-    static int max = 0;
     
-    private static void dfs(int k, boolean[] visited, int cnt) {
-        
-        max = Math.max(max, cnt);
-        
-        for (int j = 0; j < len; j++) {
-            if (!visited[j]) {
-                if (k >= d[j][0]) {
-                    visited[j] = true;
-                    dfs(k - d[j][1], visited, cnt+1);
-                    visited[j] = false;
-                }
+    static int[][] d;
+    // static boolean[] visited;
+    static ArrayList<Integer> list = new ArrayList<>();
+    
+    private static void dfs(boolean[] visited, int k, int cnt) {
+        list.add(cnt);
+        for (int i = 0; i < d.length; i++) {
+            if (!visited[i] && k >= d[i][0]) {
+                visited[i] = true;
+                dfs(visited, k - d[i][1], cnt+1);
+                visited[i] = false;
             }
         }
     }
     
     public int solution(int k, int[][] dungeons) {
-        len = dungeons.length;
         this.d = dungeons;
-        boolean visited[] = new boolean[len];
+        boolean[] visited = new boolean[d.length];
         
-        
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < d.length; i++) {
             if (k >= d[i][0]) {
-                Arrays.fill(visited, false);
                 visited[i] = true;
-                dfs(k-d[i][1], visited, 1);
-                // visited[i] = false;
+                dfs(visited, k-d[i][1], 1);
+                Arrays.fill(visited, false);
             }
         }
-        
-        return max;
+        return Collections.max(list);
     }
 }
