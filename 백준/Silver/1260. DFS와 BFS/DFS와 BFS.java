@@ -1,54 +1,52 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	
-	static boolean[] visited;
 	static int[][] arr;
-	static StringBuilder sb = new StringBuilder();
-	static StringBuilder sb2 = new StringBuilder();
+	static int N;
+	static boolean[] visited;
+	static StringBuilder sb;
 	
-	private static void dfs(int i) {
-		visited[i] = true;
-		sb.append(i).append(" ");
+	private static void dfs(int index) {
+		visited[index] = true;
+		sb.append(index).append(" ");
 		
-		for (int j = 1; j < arr[i].length; j++) {
-			if (!visited[j] & arr[i][j] == 1) {
-				dfs(j);
+		for (int i = 1; i < N+1; i++) {
+			if (arr[index][i] == 1 && visited[i] == false) {
+				dfs(i);
 			}
 		}
 	}
 	
-	private static void bfs(int i) {
+	private static void bfs(int index) {
 		Queue<Integer> q = new LinkedList<>();
-		q.add(i);
-		visited[i] = true;
+		q.add(index);
+		visited[index] = true;
 		
-		while(!q.isEmpty()) {
+		while (!q.isEmpty()) {
 			int temp = q.poll();
-			sb2.append(temp).append(" ");
-			
-			for (int j = 1; j < arr[temp].length; j++) {
-				if (arr[temp][j] != 0 && !visited[j]) {
-					visited[j] = true;
-					q.add(j);
+			sb.append(temp).append(" ");
+			for (int i = 1; i < N+1; i++) {
+				if (arr[temp][i] == 1 && visited[i] == false) {
+					visited[i] = true;
+					q.add(i);
 				}
 			}
 		}
 	}
-
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int n = Integer.parseInt(st.nextToken());
-		int m = Integer.parseInt(st.nextToken());
-		int v = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		int V = Integer.parseInt(st.nextToken());
 		
-		arr = new int[n+1][n+1];
-		visited = new boolean[n+1];
+		arr = new int[N+1][N+1];
 		
-		for (int i = 0; i < m; i++) {
+		for (int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
@@ -56,12 +54,14 @@ public class Main {
 			arr[a][b] = arr[b][a] = 1;
 		}
 		
-		dfs(v);
+		sb = new StringBuilder();
+		visited = new boolean[N+1];
+		dfs(V);
 		System.out.println(sb);
 		
-		Arrays.fill(visited, false);
-		bfs(v);
-		System.out.println(sb2);
+		sb = new StringBuilder();
+		visited = new boolean[N+1];
+		bfs(V);
+		System.out.println(sb);
 	}
-
 }
