@@ -1,16 +1,14 @@
 import java.util.*;
-import java.io.*;
 
 public class Solution {
     public int solution(int n) {
+        int answer = 0;
         
-        String temp = String.valueOf(n);
-        
-        int sum = 0;
-        
-        for (int i = 0 ; i < temp.length(); i++) {
-            sum += Integer.valueOf(temp.charAt(i) - '0');
+        while(n > 0) {
+            int temp = n % 10;
+            answer += temp;
+            n = n/ 10;
         }
-         return sum;
+        return answer;
     }
 }
