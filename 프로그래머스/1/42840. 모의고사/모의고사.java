@@ -1,27 +1,33 @@
-// 8:18 ~ 8:50
-import java.util.*;
-
 class Solution {
-    public ArrayList<Integer> solution(int[] answers) {
+    public int[] solution(int[] answers) {
         int[] one = {1,2,3,4,5};
         int[] two = {2,1,2,3,2,4,2,5};
         int[] three = {3,3,1,1,2,2,4,4,5,5};
-        int[] result = new int[3];
+        int[] correct = new int[3];
         
-        int cnt = 0;
-        for (int a : answers) {
-            if (one[cnt % 5] == a) result[0]++;
-            if (two[cnt % 8] == a) result[1]++;
-            if (three[cnt % 10] == a) result[2]++;
-            cnt++;
+        for (int i = 0; i < answers.length; i++) {
+            if (one[i%5] == answers[i]) correct[0]++;
+            if (two[i%8] == answers[i]) correct[1]++;
+            if (three[i%10] == answers[i]) correct[2]++;
         }
         
-        int max = Math.max(Math.max(result[0], result[1]), result[2]);
+        int max = Math.max(correct[0], Math.max(correct[1], correct[2]));
         
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < result.length; i++) {
-            if (result[i] == max) list.add(i+1);
+        int maxCnt = 0;
+        for (int c : correct) {
+            if (c == max) maxCnt++;
         }
-        return list;
+        
+        int[] answer = new int[maxCnt];
+        
+        int j = 0;
+        for (int i = 0; i < correct.length; i++) {
+            if (correct[i] == max) {
+                answer[j] = i+1;
+                j++;
+            }
+        }
+        
+        return answer;
     }
 }
