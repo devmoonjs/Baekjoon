@@ -1,14 +1,11 @@
 class Solution {
     public long solution(int a, int b) {
         
-        if (a > b) {
-            int temp = a;
-            a = b;
-            b = temp;
-        }
+        int x = Math.min(a,b);
+        int y = Math.max(a,b);
         
         long sum = 0;
-        for (int i = a; i <=b; i++) {
+        for (int i = x; i <= y; i++) {
             sum += i;
         }
         return sum;
