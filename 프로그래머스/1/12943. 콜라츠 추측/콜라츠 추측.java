@@ -5,13 +5,13 @@
 
 class Solution {
     public int solution(long num) {
+
         int count = 0;
-        boolean answer = true;
+        // boolean answer = true;
         
         while(num > 1) {
             if (count >= 500) {
-                answer = false;
-                break;
+                return -1;
             }
             if (num % 2 == 0) {
                 num /= 2;
@@ -21,11 +21,7 @@ class Solution {
                 count++;
             }
         }
-        if (answer) {
-            System.out.println(count);
-            return count;
-        } else {
-            return -1;
-        }
+        return count;
+        
     }
 }
