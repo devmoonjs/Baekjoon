@@ -1,4 +1,4 @@
-// 9:10 ~ 9:30
+// 9:10 ~ 9:16
 // 배열을 모두 돌며 absolutes[i] * signs[i] 를 구하여 sum 값에 누적합한다.
 
 class Solution {
