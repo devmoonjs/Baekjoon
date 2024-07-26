@@ -17,7 +17,7 @@ class Solution {
                 // 발음을 모두 제거
                 for (String can : speak) {
                     bab = bab.replace(can, " ");
-                }
+                } 
                 // 남은 문자열이 공백인지 확인
                 bab = bab.replace(" ", "");
                 if (bab.isEmpty()) {
