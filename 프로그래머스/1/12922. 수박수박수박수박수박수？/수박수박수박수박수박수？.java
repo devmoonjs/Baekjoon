@@ -1,16 +1,13 @@
-import java.util.*;
-import java.io.*;
-
 class Solution {
     public String solution(int n) {
-        String s = "수박";
+        String target = "수박";
+        String answer = "";
+        
         StringBuilder sb = new StringBuilder();
         
         for (int i = 0; i < n; i++) {
-            sb.append(s.charAt(i%2));
+            sb.append(target.charAt(i%2));
         }
-        
-        String answer = sb.toString();
-        return answer;
+        return sb.toString();
     }
 }
