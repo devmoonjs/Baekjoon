@@ -1,22 +1,19 @@
-// 문자열 길이가 4 OR 6
-// 숫자로만 구성
-
 class Solution {
     public boolean solution(String s) {
         boolean answer = true;
-        
-        if (s.length() == 4 || s.length() == 6) {
-            answer = true;
-        } else {
-            return false;
-        }
-        
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) - '0' > 9) {
-                System.out.print(i);
-                return false;
+        char[] arr = s.toCharArray();
+        // {a, 2, 3, 4}
+        if (s.length() == 4 || s.length() == 6) { // 4자리거나 6자리일때
+            for (int i = 0; i < s.length(); i++) { // 배열 갯수만큼 실행
+                if ('0' <= arr[i] && arr[i] <= '9') {
+                    System.out.println(arr[i]);
+                    continue;
+                } else {
+                    answer = false;
+                    break;
+                }
             }
-        }
-        return true;
+        } else answer = false;
+        return answer; // GG
     }
 }
