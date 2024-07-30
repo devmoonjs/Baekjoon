@@ -1,0 +1,22 @@
+// 문자열 길이가 4 OR 6
+// 숫자로만 구성
+
+class Solution {
+    public boolean solution(String s) {
+        boolean answer = true;
+        
+        if (s.length() == 4 || s.length() == 6) {
+            answer = true;
+        } else {
+            return false;
+        }
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) - '0' > 9) {
+                System.out.print(i);
+                return false;
+            }
+        }
+        return true;
+    }
+}
