@@ -1,4 +1,4 @@
-//짝수번째 알파벳은 대문자
+// 짝수번째 알파벳은 대문자
 // 홀수번째 알파벳은 소문자로
 
 class Solution {
@@ -13,10 +13,10 @@ class Solution {
                 continue;
             }
             
-            if (cnt % 2 == 0 && Character.isLowerCase(arr[i])) { // 짝수고 소문자면
+            if (cnt % 2 == 0) { // 짝수고 소문자면
                 arr[i] = Character.toUpperCase(arr[i]);
                 
-            } else if (cnt % 2 != 0 && Character.isUpperCase(arr[i])) { // 홀수고 대문자면
+            } else if (cnt % 2 != 0) { // 홀수고 대문자면
                 arr[i] = Character.toLowerCase(arr[i]);
             }
             cnt++;
