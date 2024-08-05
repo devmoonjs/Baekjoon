@@ -7,14 +7,14 @@ class Solution {
     public String solution(String s, int n) {
         char[] temp = new char[s.length()];
         
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) { // 빈칸 패스
             char c = (char)s.charAt(i);
             if (c == ' ') {
                 temp[i] = ' ';
                 continue;
             }
-            if (Character.isLowerCase(c)) {
-                if (c + n > 122) {
+            if (Character.isLowerCase(c)) { // 소문자라면
+                if (c + n > 122) { // 122 넘어가는 수
                     temp[i] = (char)(c + n - 26);
                 } else {
                     temp[i] = (char)(c + n);
