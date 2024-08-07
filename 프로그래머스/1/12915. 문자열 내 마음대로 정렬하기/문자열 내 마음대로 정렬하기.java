@@ -23,16 +23,22 @@ class Solution {
                 char char2 = map.get(s2);
                 
                 if (char1 == char2) {
-                    // n번째 문자가 같으면 사전순으로 정렬
+                    // n번째 문자가 같으면 사전순으로 정렬 (양수가 리턴)
                     return s1.compareTo(s2);
                 } else {
-                    // n번째 문자를 기준으로 정렬
+                    // n번째 문자를 기준으로 정렬 (양수가 나오면 그대로 / 음수가 나오면 자리 바꿈)
                     return char1 - char2;
                 }
             }
         });
-
+        
         // 정렬된 리스트를 배열로 변환하여 반환
-        return list.toArray(new String[0]);
+        String[] answer = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            answer[i] = list.get(i);
+        }
+
+        
+        return answer;
     }
 }
