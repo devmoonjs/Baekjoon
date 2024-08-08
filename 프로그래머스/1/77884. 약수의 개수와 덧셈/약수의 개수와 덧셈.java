@@ -18,7 +18,8 @@ class Solution {
             }
             map.put(i,cnt);
         }
-        Iterator<Integer> iter = map.keySet().iterator();
+        
+        Iterator<Integer> iter = map.keySet().iterator(); // 자료구조를 쉽게 반복할 수 있도록 
         
         int answer = 0;
         
