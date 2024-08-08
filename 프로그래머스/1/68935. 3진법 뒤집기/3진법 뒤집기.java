@@ -7,7 +7,6 @@ class Solution {
     public int solution(int n) {
         StringBuilder sb = new StringBuilder();
         
-        
         while(n > 0) {
             if (n / 3 != 0) {
                 sb.append(n % 3);
