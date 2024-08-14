@@ -5,7 +5,7 @@ class Solution {
         
         double temp = Math.sqrt(n);
         if(temp == Math.round(temp)) {
-            return (long)((temp+1) * (temp+1));
+            return (long)(Math.pow(temp+1, 2));
         } else {
             return -1;
         }
