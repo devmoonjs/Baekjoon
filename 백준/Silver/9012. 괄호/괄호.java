@@ -1,39 +1,37 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
+        Integer T = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < N; i++) {
+        while (T-- > 0) {
             boolean result = true;
-            Stack<Character> stack = new Stack<>();
-            String temp = br.readLine();
+            String ps = br.readLine();
+            Stack stack = new Stack();
+            for (int i = 0; i < ps.length(); i++) {
+                String temp = String.valueOf(ps.charAt(i));
 
-            for (int j = 0; j < temp.length(); j++) {
-                char c = temp.charAt(j);
-                if (c == '(') {
-                    stack.add(c);
-                } else if (c == ')') {
+                if (temp.equals("(")) {
+                    stack.add(temp);
+
+                } else if (temp.equals(")")) {
                     if (stack.isEmpty()) {
                         result = false;
                         break;
-                    } else {
-                        stack.pop();
                     }
+                    stack.pop();
                 }
             }
+
             if (!result || !stack.isEmpty()) {
                 System.out.println("NO");
             } else {
                 System.out.println("YES");
             }
-
         }
     }
 }
