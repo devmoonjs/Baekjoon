@@ -4,27 +4,24 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Integer N = Integer.parseInt(br.readLine());
+        Queue<Integer> q = new LinkedList<>();
 
-        int n = Integer.parseInt(bf.readLine());
-
-        Queue<Integer> queue = new LinkedList<>();
-
-        // 큐에 값 저장
-        for (int i = 1; i <= n; i++) {
-            queue.add(i);
+        for (int i = 1; i <= N; i++) {
+            q.add(i);
         }
 
-        while (queue.size() > 1) {
-            queue.poll();
-            int temp = queue.element();
-            queue.poll();
-            queue.add(temp);
+        while (q.size() != 1) {
+            q.poll();
+            int temp = q.poll();
+            q.add(temp);
         }
-        System.out.println(queue.element());
+
+        int result = q.poll();
+        System.out.println(result);
     }
 }
