@@ -1,12 +1,11 @@
 class Solution {
     
-    static int answer = 0;
-    static int len;
     static int[] numbers;
     static int target;
+    static int len;
+    static int answer;
     
-    private static void dfs(int index, int sum) {
-        
+    static void dfs(int index, int sum) {
         if (index == len) {
             if (sum == target) {
                 answer++;
@@ -20,8 +19,8 @@ class Solution {
     }
     
     public int solution(int[] numbers, int target) {
-        this.target = target;
         this.numbers = numbers;
+        this.target = target;
         this.len = numbers.length;
         
         dfs(0,0);
