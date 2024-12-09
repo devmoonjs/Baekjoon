@@ -1,42 +1,44 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
+import java.io.*;
 
-public class Main {
-        public static void main(String[] args) throws IOException {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
-            int K = Integer.parseInt(st.nextToken());
-            Queue<Integer> result = new LinkedList<>();
-            Queue<Integer> queue = new LinkedList<>();
-
-            for (int i = 1; i <= N; i++) {
-                queue.add(i);
+public class Main{
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        
+        Queue<Integer> q = new LinkedList<>();
+        
+        for (int i = 0; i < N; i++) {
+            q.add(i + 1);
+        }
+        
+        Queue<Integer> answer = new LinkedList<>();
+        int cnt = 1;
+        
+        while(!q.isEmpty()) {
+            if (cnt < K) {
+                q.add(q.poll());
+                cnt++;
             }
-
-            int cnt = 1;
-            while (!queue.isEmpty()) {
-                if (cnt < K) {
-                    int temp = queue.poll();
-                    queue.add(temp);
-                    cnt++;
-
-                } else if (cnt == K) {
-                    cnt = 1;
-                    result.add(queue.poll());
-                } else if (queue.size() < K) {
-                    result.add(queue.poll());
-                }
+            
+            else if (cnt == K) {
+                answer.add(q.poll());
+                cnt = 1;
             }
-            System.out.print("<");
-            for (int i = 0; i < N; i++) {
-                System.out.print(result.poll());
-                if (!result.isEmpty()) {
-                    System.out.print(", ");
-                }
+        }
+        
+        System.out.print("<");
+        while(!answer.isEmpty()) {
+            if (answer.size() > 1) {
+                System.out.print(answer.poll() + ", ");
             }
-            System.out.println(">");
+            
+            else if (answer.size() == 1) {
+                System.out.print(answer.poll() + ">");
+            }
         }
     }
+}
