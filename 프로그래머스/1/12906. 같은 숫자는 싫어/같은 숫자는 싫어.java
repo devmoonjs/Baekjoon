@@ -1,35 +1,31 @@
-// q 가 비어 있으면 값 추가
-// q 가 비어 있지 않다면 -> 앞에 값 꺼내서 비교
-// 비교해서 값이 같다면 pass
-// 비교해서 값이 틀리다면 add
-
 import java.util.*;
 
 public class Solution {
-    
-    static int pre = 0; 
-    
     public int[] solution(int []arr) {
         Queue<Integer> q = new LinkedList<>();
+        int temp = 0;
         
-        for (int a : arr) {
+        for (int number : arr) {
             if (q.isEmpty()) {
-                q.add(a);
-                pre  = a;
+                temp = number;
+                q.add(number);
+                continue;
             } else {
-                if (pre != a) {
-                    q.add(a);
-                    pre = a;
+                if (temp == number) {
+                    continue;
+                } else {
+                    q.add(number);
+                    temp = number;
                 }
             }
         }
+        int size = q.size();
+        int[] answer = new int[size];
         
-        int[] answer = new int[q.size()];
-        int cnt = 0;
-        
-        while(!q.isEmpty()) {
-            answer[cnt++] = q.poll();
+        for (int i = 0; i < size; i++) {
+            answer[i] = q.poll();
         }
+        
         return answer;
     }
 }
