@@ -1,34 +1,41 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Stack;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+public class Main{
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Integer T = Integer.parseInt(br.readLine());
+        int testCase = Integer.parseInt(br.readLine());
+        while(testCase-- > 0) {
+            Stack<Character> stack = new Stack();
+            String question = br.readLine();
+            int len = question.length();
+            boolean isValid = true;
 
-        while (T-- > 0) {
-            boolean result = true;
-            String ps = br.readLine();
-            Stack stack = new Stack();
-            for (int i = 0; i < ps.length(); i++) {
-                String temp = String.valueOf(ps.charAt(i));
 
-                if (temp.equals("(")) {
-                    stack.add(temp);
+            for (int i = 0; i < len; i++) {
+                char now = question.charAt(i);
+                // 스택이 비어있거나, 넣을 값이 ( 라면
+                if (stack.isEmpty() || now == '(' ) {
 
-                } else if (temp.equals(")")) {
-                    if (stack.isEmpty()) {
-                        result = false;
-                        break;
-                    }
+                    // 넣고 다음으로
+                    stack.push(now);
+                    continue;
+                }
+
+                // 넣을 값이 ) 이고, 직전 값이 ( 라면,
+                if (now == ')' && stack.peek() == '(') {
+
+                    // 직전 것 제거
                     stack.pop();
+                } else {
+                    isValid = false;
+                    break;
                 }
             }
 
-            if (!result || !stack.isEmpty()) {
+            if (!stack.isEmpty() || !isValid) {
                 System.out.println("NO");
+
             } else {
                 System.out.println("YES");
             }
