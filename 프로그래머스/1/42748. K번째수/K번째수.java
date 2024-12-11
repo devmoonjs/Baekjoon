@@ -1,27 +1,23 @@
 import java.util.*;
-import java.io.*;
 
 class Solution {
     public int[] solution(int[] array, int[][] commands) {
-        int T = commands.length;
-        int[] answer = new int[T];
+        int[] answer = new int[commands.length];
+        int index = 0;
         
-        int cnt = 0;
-        while (T-- > 0) {
-            int i = commands[cnt][0]; 
-            int j = commands[cnt][1];
-            int k = commands[cnt][2];
+        for (int[] command : commands) {
+            int i = command[0];
+            int j = command[1];
+            int k = command[2];
+            int[] tempArr = new int[j - i + 1];
             
-            int[] temp = new int[j-i+1];
-            int idx = 0;
-            for (int a = i-1; a < j; a++) { // 새로운 배열 생성
-                temp[idx] = array[a];
-                idx++;
+            int cnt = 0;
+            for (int a = i-1; a < j; a++) {
+                tempArr[cnt++] = array[a];
             }
             
-            Arrays.sort(temp);
-            answer[cnt] = temp[k-1];
-            cnt++;
+            Arrays.sort(tempArr);
+            answer[index++] = tempArr[k-1];
         }
         return answer;
     }
