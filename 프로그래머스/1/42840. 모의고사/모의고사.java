@@ -1,33 +1,39 @@
+import java.util.*;
+
 class Solution {
     public int[] solution(int[] answers) {
-        int[] one = {1,2,3,4,5};
-        int[] two = {2,1,2,3,2,4,2,5};
-        int[] three = {3,3,1,1,2,2,4,4,5,5};
-        int[] correct = new int[3];
+        int[] first = {1,2,3,4,5};
+        int[] second = {2,1,2,3,2,4,2,5};
+        int[] third = {3,3,1,1,2,2,4,4,5,5};
         
-        for (int i = 0; i < answers.length; i++) {
-            if (one[i%5] == answers[i]) correct[0]++;
-            if (two[i%8] == answers[i]) correct[1]++;
-            if (three[i%10] == answers[i]) correct[2]++;
+        int[] score = new int[4];
+        
+        int answerLen = answers.length;
+        for (int i = 0; i < answerLen; i++) {
+            if (first[(i) % 5] == answers[i]) score[1]++;
+            if (second[(i) % 8] == answers[i]) score[2]++;
+            if (third[(i) % 10] == answers[i]) score[3]++;
         }
         
-        int max = Math.max(correct[0], Math.max(correct[1], correct[2]));
+        ArrayList<Integer> list = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
         
-        int maxCnt = 0;
-        for (int c : correct) {
-            if (c == max) maxCnt++;
+        for (int j = 1; j < 4; j++) {
+            max = Math.max(max, score[j]);
         }
         
-        int[] answer = new int[maxCnt];
-        
-        int j = 0;
-        for (int i = 0; i < correct.length; i++) {
-            if (correct[i] == max) {
-                answer[j] = i+1;
-                j++;
-            }
+        for (int k = 1; k < 4; k++) {
+            if(score[k] == max) list.add(k);
         }
         
-        return answer;
+        Collections.sort(list);
+        int size = list.size();
+        int[] returnArr = new int[size];
+        
+        for (int l = 0; l < size; l++) {
+            returnArr[l] = list.get(l);
+        }
+        
+        return returnArr;
     }
 }
