@@ -1,38 +1,37 @@
-// 8:35 ~ 8:55
-
 import java.util.*;
 
 class Solution {
     
     static HashSet<Integer> set = new HashSet<>();
     
-    static private void recursive(String comb, String others) {
-        if (comb != "" ) set.add(Integer.valueOf(comb));
+    public static void recursive(String comb, String others) {
+        if (comb != "") set.add(Integer.parseInt(comb));
         
         for (int i = 0; i < others.length(); i++) {
             recursive(comb + others.charAt(i), others.substring(0,i) + others.substring(i+1));
         }
     }
     
-    static private boolean isPrime(int index) {
-        if (index == 1 || index == 0) return false;
-        int lim = (int)Math.sqrt(index);
+    public static boolean isPrime(int num) {
+        if (num == 0 || num == 1) return false;
         
-        for (int i = 2; i <= lim ; i++) {
-            if (index % i == 0 ) return false;
+        int temp = (int)Math.sqrt(num);
+        for (int i = 2; i <= temp; i++) {
+            if (num % i == 0) {
+                return false;
+            }
         }
-        
         return true;
-    }
+    } 
     
     public int solution(String numbers) {
         recursive("", numbers);
         
-        int answer = 0;
+        int cnt = 0;
         
-        for (Integer a : set) {
-            if (isPrime(a)) answer++;
+        for (Integer temp : set) {
+            if (isPrime(temp)) cnt++;
         }
-        return answer;
+        return cnt;
     }
 }
