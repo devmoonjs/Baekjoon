@@ -2,27 +2,27 @@ import java.util.*;
 
 class Solution {
     public int solution(int n, int[][] costs) {
-        // union 배열 초기화
         int[] parent = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
         }
         
-        // 비용 정렬
-        Arrays.sort(costs, (a, b) -> Integer.compare(a[2], b[2]));
+        Arrays.sort(costs, (a,b) -> Integer.compare(a[2], b[2]));
+        int totalPay = 0;
         
-        int totalCost = 0;
         for (int[] cost : costs) {
             int from = cost[0];
             int to = cost[1];
-            int bridgeCost = cost[2];
+            int pay = cost[2];
             
+            // 합치기 직전, 노드가 연결되어있는지 파악.
             if (find(parent, from) != find(parent, to)) {
                 union(parent, from, to);
-                totalCost += bridgeCost;
+                totalPay += pay;
             }
         }
-        return totalCost;
+        
+        return totalPay;
     }
     
     private int find(int[] parent, int x) {
