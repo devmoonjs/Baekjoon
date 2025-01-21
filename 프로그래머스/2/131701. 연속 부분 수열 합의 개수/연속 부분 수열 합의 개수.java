@@ -1,28 +1,27 @@
 /*
-    12:16
-    일단 N 번 반복해야 돼(i),
-    반복할 때마다, N번 반복하며 j 의 길이만큼 더해야 돼,
-        j ~ j
-    
+    원형 배열
+    1개씩 더할 떄, -> 5번 j ~ i+j
+    2개씩 더할 때, -> 5번
+    3개씩 더할 때, -> 5번
+    4개씩 더할 때, -> 5번
+    5개씩 더할 때, -> 5번
+
 */
 import java.util.*;
 
 class Solution {
     public int solution(int[] elements) {
-        int elementsLen = elements.length;
-        
+        int answer = 0;
+        int eleLen = elements.length;
         HashSet<Integer> set = new HashSet<>();
-        int[] newArr = new int[elementsLen * 2];
         
-        for (int i = 0; i < elementsLen; i++) {
-            newArr[i] = elements[i];
-            newArr[i+elementsLen] = elements[i];
-        }
-        
-        for (int i = 1; i <= elementsLen; i++) {
-            for (int j = 0; j < elementsLen; j++) {
-                // j 부터 i 길이만큼 더함.
-                set.add(Arrays.stream(newArr, j, j+i).sum());
+        for (int i = 1; i <= eleLen; i++) {
+            for (int j = 0; j < eleLen; j++) {
+                int sum = 0;
+                for (int k = j; k < j + i; k++) {
+                    sum += elements[k % eleLen];
+                }
+                set.add(sum);
             }
         }
         return set.size();
