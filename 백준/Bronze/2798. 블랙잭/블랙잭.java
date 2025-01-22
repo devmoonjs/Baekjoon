@@ -1,16 +1,7 @@
-import java.io.*;
 import java.util.*;
-
-/*
-    12:53
-    카드의 합 최대 21
-    각 카드는 모두 양의 정수
-    N장의 카드를 깐 후, 숫자 M 을 외침.
-    이 후, 3장의 카드 선택 -> 이 합이 <= M 이어야 함.
-*/
+import java.io.*;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -18,26 +9,27 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        int[] arr = new int[N];
+        int[] cards = new int[N];
+
         st = new StringTokenizer(br.readLine());
 
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+        for (int i = 0; i < cards.length; i++) {
+            cards[i] = Integer.parseInt(st.nextToken());
         }
 
-        int maxSum = 0;
+        int sum = 0;
+        int answer = 0;
 
-        for (int i = 0 ; i < N - 2; i++) {
+        for (int i = 0; i < N - 2; i++) {
             for (int j = i + 1; j < N - 1; j++) {
                 for (int k = j + 1; k < N; k++) {
-                    int sum = arr[i] + arr[j] + arr[k];
+                    sum = cards[i] + cards[j] + cards[k];
 
-                    if (sum <= M) {
-                        maxSum = Math.max(maxSum, sum);
-                    }
+                    if (sum <= M) answer = Math.max(answer, sum);
                 }
             }
         }
-        System.out.println(maxSum);
+
+        System.out.println(answer);
     }
 }
