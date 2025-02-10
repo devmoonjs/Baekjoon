@@ -1,32 +1,44 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+/**
+ * 누적합 -> 누적합 배열 선언
+ * int[] sumArr = new int[N+1];
+ * for (1 ~ N) {
+ *  sumArr[i] = sumArr[i-1] + Integer.parseInt(st.nextToken());
+ * }
+ * 
+ * int start = ~;
+ * int end = ~;
+ * answer = sumArr[start] - sumArr[end];
+ * 
+ */
+import java.io.*;
 
-    public static void main(String[] args) throws IOException{
+public class Main {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        long[] arr = new long[N+1];
-
+        int[] sumArr = new int[N+1];
         st = new StringTokenizer(br.readLine());
 
-        for (int i = 1; i < N+1; i++) {
-            arr[i] = arr[i - 1] + Integer.parseInt(st.nextToken());
+        for (int i = 1; i < N + 1; i++) {
+            sumArr[i] = sumArr[i-1] + Integer.parseInt(st.nextToken());
         }
 
-        long result = 0;
-
+        // TestCase
         while(M-- > 0) {
             st = new StringTokenizer(br.readLine());
-            int i = Integer.parseInt(st.nextToken());
-            int j = Integer.parseInt(st.nextToken());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
 
-            result = arr[j] - arr[i-1];
-            System.out.println(result);
+            int answer = sumArr[end] - sumArr[start - 1];
+            System.out.println(answer);
         }
     }
 }
