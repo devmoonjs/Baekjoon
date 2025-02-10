@@ -1,69 +1,81 @@
+import java.util.*;
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Main {
-	
-	static char[][] arr;
-	static boolean[][] visited;
-	static int[] dx = {1, 0, -1, 0};
-	static int[] dy = {0, 1, 0, -1};
-	static int M;
-	static int N;
-	static int count = 0;
-	static int wCount = 0;
-	static int bCount = 0;
-	
-	
-	private static void DFS(int a, int b, char color) {
-		visited[a][b] = true;
-		count +=1;
-		
-		for (int i =0; i < 4; i++) {
-			int newA = a + dx[i];
-			int newB = b + dy[i];
-			
-			if (newA >= 0 && newA < M && newB >=0 && newB < N && arr[newA][newB] == color) {
-				if (!visited[newA][newB]) {
-					DFS(newA, newB, arr[newA][newB]);
-				}
-			}
-		}
-	}
-	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		
-		arr = new char[M][N];
-		visited = new boolean[M][N];
-		
-		for (int i = 0; i < M; i++) {
-			String str = br.readLine();
-			
-			for (int j = 0; j < N; j++) {
-				arr[i][j] = str.charAt(j);
-			}
-		}
-		
-		for (int i = 0; i < M; i++) {
-			for (int j = 0; j < N; j++) {
-				if (!visited[i][j]) {
-					char color = arr[i][j];
-					count = 0;
-					DFS(i, j, color);
-					
-					if (color == 'W') {
-						wCount += count * count;
-					}
-					else {
-						bCount += count * count;
-					}
-				}
-			}
-		}
-		System.out.println(wCount + " " + bCount);
-	}	
+
+    static String[][] arr;
+    static boolean[][] visited;
+    static int[] dx = {1, 0, -1, 0};
+    static int[] dy = {0, 1, 0, -1};
+    static int N;
+    static int M;
+    static int cnt;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        N = Integer.parseInt(st.nextToken()); // 가로
+        M = Integer.parseInt(st.nextToken()); // 세로
+
+        arr = new String[M][N];
+        visited = new boolean[M][N];
+    
+        for (int i = 0; i < M; i++) {
+            String line = br.readLine();
+            for (int j = 0; j < N; j++) {
+                arr[i][j] = String.valueOf(line.charAt(j));
+            }
+        }
+
+        int wSum = 0;
+        int bSum = 0;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (!visited[i][j]) {
+                    cnt = 0;
+
+                    if (arr[i][j].equals("W")) {
+                        dfs(new Point(i,j), "W");
+                        wSum += cnt * cnt;
+                    } else {
+                        dfs(new Point(i, j), "B");
+                        bSum += cnt * cnt;
+
+                    }
+                }
+            }
+        }
+        System.out.println(wSum);
+        System.out.println(bSum);
+    }
+
+    static void dfs(Point point, String color) {
+        int x = point.x;
+        int y = point.y;
+        visited[x][y] = true;
+        cnt++;
+
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+
+            if (0 <= newX && newX < M && 0 <= newY && newY < N) {
+                if (arr[newX][newY].equals(color) && !visited[newX][newY]) {
+                    dfs(new Point(newX, newY), color);
+                }
+            }
+        }
+
+    }
+
+    static class Point {
+        int x;
+        int y;
+
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+    }
 }
