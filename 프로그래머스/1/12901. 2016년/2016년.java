@@ -5,13 +5,12 @@ class Solution {
         
         int day = 0;
         
-        for (int i = 0; i < a; i++) {
+        for (int i = 1; i < a; i++) {
             day += month[i];    
         }
         
         day += b;
         
-        String result = week[(day-1) % 7];
-        return result;
+        return week[(day-1) % 7];
     }
 }
