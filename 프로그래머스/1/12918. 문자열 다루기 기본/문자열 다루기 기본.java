@@ -1,19 +1,17 @@
 class Solution {
-    public boolean solution(String s) {
-        boolean answer = true;
-        char[] arr = s.toCharArray();
-        // {a, 2, 3, 4}
-        if (s.length() == 4 || s.length() == 6) { // 4자리거나 6자리일때
-            for (int i = 0; i < s.length(); i++) { // 배열 갯수만큼 실행
-                if ('0' <= arr[i] && arr[i] <= '9') {
-                    System.out.println(arr[i]);
+    public boolean solution(String s) {        
+        int sLen = s.length();
+        if (sLen == 4 || sLen == 6) {
+            for (int i = 0; i < sLen; i++) {
+                if ('0' <= s.charAt(i) && s.charAt(i) <= '9') {
                     continue;
                 } else {
-                    answer = false;
-                    break;
+                    return false;
                 }
             }
-        } else answer = false;
-        return answer; // GG
+        } else {
+            return false;
+        }
+        return true;
     }
 }
