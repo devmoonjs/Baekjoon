@@ -1,16 +1,16 @@
 class Solution {
     public String solution(String s) {
-        int sLength = s.length();
-        String answer = "";
+        int sLen = s.length();
+        int mid = 0;
+        String result = "";
         
-        if (sLength % 2 != 0) {
-            int mid = sLength / 2 + 1;
-            answer = String.valueOf(s.charAt(mid-1));
+        if (sLen % 2 != 0) {
+            mid = sLen / 2 + 1;
+            result = String.valueOf(s.charAt(mid-1));
         } else {
-            int mid = sLength / 2 - 1;
-            answer = s.substring(mid, mid+2);
+            mid = sLen / 2 - 1;
+            result = s.substring(mid, mid+2);
         }
-        
-        return answer;
+        return result;
     }
 }
