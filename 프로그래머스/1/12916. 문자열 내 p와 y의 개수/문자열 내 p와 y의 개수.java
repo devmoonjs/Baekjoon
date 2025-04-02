@@ -1,28 +1,16 @@
-import java.util.*;
-import java.io.*;
-
 class Solution {
     boolean solution(String s) {
-        boolean answer = true;
-
-        String newS = s.toUpperCase();
-        int p = 0;
-        int y = 0;
+        s = s.toUpperCase();
+        int yCnt = 0;
+        int pCnt = 0;
         
-        for (int i = 0; i < newS.length(); i++) {
-            if (newS.charAt(i) == 80) {
-                p++;
-            }
-            
-            if (newS.charAt(i) == 89) {
-                y++;
-            }
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'Y') yCnt++;
+            if (s.charAt(i) == 'P') pCnt++;
         }
         
-        if (p != y) {
-            answer = false;
-        }
+        if (yCnt != pCnt) return false;
         
-        return answer;
+        return true;
     }
 }
