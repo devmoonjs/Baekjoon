@@ -10,35 +10,27 @@ import java.util.*;
 
 class Solution {
     
-    static int[][] wires;
-    static int n;
     static ArrayList<Integer>[] graph;
-    static boolean[] visited;
-    static int nodeCnt;
-    static int min;
+    static int cnt = 0;
+    static boolean[] checked;
     
-    private static void dfs(int index) {
-        visited[index] = true;
-        nodeCnt++;
-        
+    static void dfs(int index) {
+        cnt++;
+        checked[index] = true;
         for (int next : graph[index]) {
-            if (!visited[next]) {
+            if (!checked[next]) {
                 dfs(next);
             }
         }
     }
     
     public int solution(int n, int[][] wires) {
-        this.wires = wires;
-        this.n = n;
         graph = new ArrayList[n+1];
         
-        // 빈 그래프 생성
         for (int i = 1; i < n+1; i++) {
             graph[i] = new ArrayList<>();
         }
         
-        // 그래프 그리기
         for (int i = 0; i < wires.length; i++) {
             int a = wires[i][0];
             int b = wires[i][1];
@@ -47,30 +39,27 @@ class Solution {
             graph[b].add(a);
         }
         
-        min = Integer.MAX_VALUE;
-        // 탐색 시작!
+        int min = Integer.MAX_VALUE;
+        
         for (int i = 0; i < wires.length; i++) {
             int in = wires[i][0];
             int out = wires[i][1];
             
-            // 간선 삭제
             graph[in].remove(Integer.valueOf(out));
             graph[out].remove(Integer.valueOf(in));
             
-            visited = new boolean[n+1];
-            nodeCnt = 0;
+            checked = new boolean[n+1];
+            cnt = 0;
             
-            // dfs 시작
             dfs(1);
             
-            // 차 계산
-            int diff = Math.abs(n - nodeCnt - nodeCnt);
+            int diff = Math.abs(n - cnt - cnt);
             min = Math.min(diff, min);
             
-            // 그래프 다시 붙이기
             graph[in].add(out);
             graph[out].add(in);
         }
+        
         return min;
     }
 }
