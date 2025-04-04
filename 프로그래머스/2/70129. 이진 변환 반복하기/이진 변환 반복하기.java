@@ -1,21 +1,23 @@
+import java.util.*;
+
 class Solution {
-    public static int[] solution(String s) {
-		int[] answer = new int[2];
-		
-		while(s.length() > 1) {
-			int cntOne = 0;
-			
-			for(int i = 0; i < s.length(); i++) {
-				
-				if (s.charAt(i) == '0') {
-					answer[1]++;
-				} else {
-					cntOne++; // 숫자 1이 몇개인지
-				}
-			}
-			s = Integer.toBinaryString(cntOne);
-			answer[0]++;
-		}
-		return answer;
-	}
+    
+    public int[] solution(String s) {
+        int[] answer = new int[2];
+        
+        while(s.length() > 1) {
+            int oneCnt = 0;
+            for (char c : s.toCharArray()) {
+                if (c == '1') {
+                    oneCnt++;
+                } else {
+                    answer[1]++;
+                }
+            }
+            s = Integer.toBinaryString(oneCnt);
+            answer[0]++;
+        }
+
+        return answer;
+    }
 }
