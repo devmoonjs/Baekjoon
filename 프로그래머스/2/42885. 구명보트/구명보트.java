@@ -1,33 +1,45 @@
-import java.util.*;
-
 /*
-    1. 내림차순 정렬
-    2. while()
+    최대 2명 탑승 가능
+    limit 의 제한 존재
+    큰 거 먼저 탑승, boat++; maxIndex; livePerson++;
+    / if (가능하다면) 제일 작은 사람 탑승, minIndex;, livePerson++;
+    
+    int peopleLen = people.length()
+    int maxIndex = peopleLen - 1;
+    int minIndex = 0;
+    while(livePerson < people.length()) {
+        int nowPerson = people[maxIndex--];
+        boat++;
+        livePerson++;
+        
+        if (nowPerson + people[minIndex] <= limit) {
+            minIndex++;
+            livePerson++;
+        }
+    }
 */
+import java.util.*;
 
 class Solution {
     public int solution(int[] people, int limit) {
-        Arrays.sort(people);
-        int peopleCnt = people.length;
-        int boatCnt = 0;
-        int livePeople = 0;
-        int maxIndex = peopleCnt - 1;
+        int peopleLen = people.length;
+        int maxIndex = peopleLen - 1;
         int minIndex = 0;
+        int livePerson = 0;
+        int boat = 0;
         
-        while(livePeople < peopleCnt) {
-            // 무조건 제일 Max 한 명 바로 탑승
-            int nowWeight = people[maxIndex];
-            livePeople++;
+        Arrays.sort(people);
+        
+        while(livePerson < peopleLen) {
+            int nowPerson = people[maxIndex--];
+            boat++;
+            livePerson++;
             
-            // 두명 탑승 가능할 때
-            if (nowWeight + people[minIndex] <= limit) {
+            if (nowPerson + people[minIndex] <= limit) {
                 minIndex++;
-                livePeople++;
+                livePerson++;
             }
-            
-            maxIndex--;
-            boatCnt++;
         }
-        return boatCnt;
+        return boat;
     }
 }
