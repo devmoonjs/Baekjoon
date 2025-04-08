@@ -1,21 +1,18 @@
-// 8:53 ~ 9:23
-
 class Solution {
     public int[] solution(int brown, int yellow) {
-        int carpet = brown + yellow;
-        int[] answer = new int[2];
-        
-        for (int i = 1; i <= carpet; i++) {
-            if (carpet % i == 0) {
-                int a = i;
-                int b = carpet / i;
+        int hap = brown + yellow;
+        int x = 0;
+        int y = 0;
+        for (int i = 3; i < hap - 2; i++) {
+            if (hap % i == 0) {
+                y = hap / i;
                 
-                if (a >= b && (a-2) * (b-2) == yellow) {
-                    answer[0] = a;
-                    answer[1] = b;
+                if (i >= y && (i-2) * (y-2) == yellow) {
+                x = i;
+                break;
                 }
             }
         }
-        return answer;
+        return new int[]{x, y};
     }
 }
