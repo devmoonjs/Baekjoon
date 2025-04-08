@@ -15,7 +15,6 @@ class Solution {
             int to = cost[1];
             int pay = cost[2];
             
-            // 합치기 직전, 노드가 연결되어있는지 파악.
             if (find(parent, from) != find(parent, to)) {
                 union(parent, from, to);
                 totalPay += pay;
