@@ -1,27 +1,20 @@
-import java.io.IOException;
-import java.util.Stack;
+import java.util.*;
 
 class Solution
 {
-    public int solution(String s)
-    {
+    public int solution(String s) {
         Stack<Character> stack = new Stack<>();
         
-        for (int i = 0 ; i < s.length(); i++) {
-            if (stack.isEmpty()) {
-                stack.push(s.charAt(i));
+        for (Character c : s.toCharArray()) {
+            if (stack.isEmpty() || stack.peek() != c) {
+                stack.add(c);
             } else {
-                if (stack.peek().equals(s.charAt(i))) {
-                    stack.pop();
-                } else {
-                    stack.push(s.charAt(i));
-                }
+                stack.pop();
             }
         }
-        if (stack.isEmpty()) {
-            return 1;
-        } else {
-            return 0;
-        }
+        
+        if (stack.isEmpty()) return 1;
+        
+        return 0;
     }
 }
