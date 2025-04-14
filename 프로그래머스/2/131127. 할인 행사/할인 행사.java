@@ -1,39 +1,37 @@
 /*
-    10일동안 회원 자격
-    매일 한 가지 제품을 할인 - 하루 하나씩만 구매 가능
-    원하는 제품과 수량이 할인하는 날짜와 10일 연속 일치할 경우 - 회원가입
-    
-    뒤에서 부터 돌면서, 카운트하고, 최소 값의 index 구하면 되지 않나
+    1. window 자료구조 생성
+    2. 처음부터 돌며 window 크기 10에 맞춰 새로운 map 에 적용.
+    3. 마지막에 map 크기가 0 이라면 answer++;
 */
 import java.util.*;
 
 class Solution {
     public int solution(String[] want, int[] number, String[] discount) {
-        
-        Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < want.length; i++) {
-            map.put(want[i], number[i]);
+        int answer = 0;
+        Map<String, Integer> productMap = new HashMap<>();
+        for (int i = 0;i < want.length; i++) {
+            productMap.put(want[i], number[i]);
         }
-        
-        Map<String, Integer> window = new HashMap<>();
-        int cnt = 0;
+        Map<String, Integer> windowMap = new HashMap<>();
         
         for (int i = 0; i <= discount.length - 10; i++) {
-            window = new HashMap<>();
-            window.putAll(map);
+            windowMap = new HashMap<>();    
+            windowMap.putAll(productMap);
             
             for (int j = i; j < i + 10; j++) {
                 String key = discount[j];
-                if (window.containsKey(key)) {
-                    if (window.get(key) - 1 == 0) {
-                        window.remove(key);
+                if (windowMap.containsKey(key)) {
+                    if (windowMap.get(key) - 1  == 0) {
+                        windowMap.remove(key);
                     } else {
-                        window.put(key, window.get(key) - 1);
+                        windowMap.put(key, windowMap.get(key) - 1);
                     }
                 }
             }
-            if (window.size() == 0) cnt++;
+            if (windowMap.size() == 0) {
+                answer++;
+            }
         }
-        return cnt;
+        return answer;
     }
 }
