@@ -1,35 +1,28 @@
-import java.util.StringTokenizer;
+import java.util.*;
+
 class Solution {
-    static String answer;
     public String solution(String s) {
-        answer = "";
-
-		// 첫번째 일단 수행
-		makeUpper(s.charAt(0));
-
-		for (int i = 1; i < s.length(); i++) {
-			char c = s.charAt(i);
-			char test = s.charAt(i - 1);
-
-			if (test == ' ' && c!= ' ') {
-				makeUpper(c);
-			} else if (Character.isUpperCase(c)) {
-				c = Character.toLowerCase(c);
-				answer += c;
-			} else if (c == ' ') {
-				answer += c;
-			} else {
-				answer += c;
-			}
-		}
-		return answer;
-	}
-
-	private static void makeUpper(char c) {
-		if (Character.isLowerCase(c)) {
-			answer += Character.toUpperCase(c);
-		} else {
-			answer += c;
-		}
-	}
+        boolean isFirstCase = true;
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < s.length(); i++) {
+            Character c = s.charAt(i);
+            
+            if (c == ' ') {
+                sb.append(" ");
+                isFirstCase = true;
+                continue;
+            }
+            
+            if (isFirstCase && Character.isDigit(c) == false) {
+                isFirstCase = false;
+                sb.append(Character.toUpperCase(c));
+                
+            } else {
+                isFirstCase = false;
+                sb.append(Character.toLowerCase(c));
+            }
+        }
+        return sb.toString();
+    }
 }
