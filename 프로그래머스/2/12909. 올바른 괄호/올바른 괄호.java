@@ -1,34 +1,26 @@
-// '('는 그냥 넣음
-// ')'는 이전 값 비교 -> '(' 이면 하나 빼기
-// 마지막에 스택 비었는지 확인
+/*
+    if (비어 있으면) push
+    if (stack.peek()= '(' 이면) pop 하고 push
+*/
 import java.util.*;
-
 class Solution {
     boolean solution(String s) {
+        Stack<Character> stack = new Stack<>();
         
-        boolean answer;
-        
-        Stack<String> stack = new Stack<>();
-        
-        for (int i = 0; i < s.length(); i++) {
-            String temp = String.valueOf(s.charAt(i));
+        for (char c : s.toCharArray()) {
+            if (stack.isEmpty()) {
+              stack.push(c);  
+            } 
             
-            if (temp.equals("(")) {
-                stack.push(temp);
+            else if (c == ')' && stack.peek() == '(') {
+                stack.pop();
             }
             
-            else if (!stack.isEmpty()) {
-                stack.pop();
-            } else {
-                answer = false;
-                return answer;
+            else {
+                stack.push(c);
             }
         }
         
-        if (stack.isEmpty()) {
-            answer = true;
-        } else answer = false;
-        
-        return answer;
+        return stack.isEmpty();
     }
 }
