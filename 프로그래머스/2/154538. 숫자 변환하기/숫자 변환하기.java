@@ -5,10 +5,8 @@ class Solution {
         int cnt = 0;
         Queue<Integer> q = new LinkedList<>();
         boolean[] visited = new boolean[1000001];
-        
         q.add(x);
         visited[x] = true;
-        
         while(!q.isEmpty()) {
             int size = q.size();
             for (int i = 0 ; i < size; i++) {
